@@ -1,22 +1,23 @@
 'use strict'
 
-console.log(isNaN(parseFloat('enterNumber')));
-
 const whatsNumber = function (myNumber) {
     let startGame;
     let endGame;
+    let attempts = 10;
 
     startGame = confirm('Играем в Угадай число от 1 до 100?');
 
     if (startGame) {
 
-        takeNumber(myNumber);
+        takeNumber(myNumber, attempts);
 
     } else endGame = alert('Игра завершается..')
 } 
 
-const takeNumber = function (unknowNum) {
+const takeNumber = function (unknowNum, attempts) {
     let enterNumber;
+
+    console.log(attempts);
 
     enterNumber = prompt('Введите число от 1 до 100');
 
@@ -31,28 +32,42 @@ const takeNumber = function (unknowNum) {
 
     enterNumber = Number(enterNumber);
 
+    attempts--;
+
     if(enterNumber < unknowNum) {
-        numLessAlert();
+        numLessAlert(attempts);
     } 
     
     if(enterNumber > unknowNum) {
-        numMoreAlert();
+        numMoreAlert(attempts);
     }
 
     if (enterNumber === unknowNum)
-    { return endGame = alert('Поздравляю, Вы угадали!!!')}
+    { return alert('Поздравляю, Вы угадали!!!')}
 
-    takeNumber(unknowNum);
+    
+    if(attempts === 0) {
+        let choose;
+
+        choose = confirm('Попытки закончились, хотите сыграть еще?')
+
+        if(choose) {
+            attempts = 10;
+            unknowNum = 45;
+        }
+    }
+
+    takeNumber(unknowNum, attempts);
 }
 
-const numLessAlert = function () {
+const numLessAlert = function (attempt) {
 
-    alert('Загаданное число меньше');
+    alert('Загаданное число меньше, осталось ' + attempt + ' попыток');
 }
 
-const numMoreAlert = function () {
+const numMoreAlert = function (attempt) {
 
-    alert('Загаданное число больше');
+    alert('Загаданное число больше, осталось ' + attempt + ' попыток');
 }
 
 //запуск игры
