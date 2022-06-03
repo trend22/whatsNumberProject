@@ -4,7 +4,6 @@ console.log(isNaN(parseFloat('enterNumber')));
 
 const whatsNumber = function (myNumber) {
     let startGame;
-    let endGame;
 
     startGame = confirm('Играем в Угадай число от 1 до 100?');
 
@@ -12,7 +11,7 @@ const whatsNumber = function (myNumber) {
 
         takeNumber(myNumber);
 
-    } else endGame = alert('Игра завершается..')
+    } else alert('Игра завершается..')
 } 
 
 const takeNumber = function (unknowNum) {
@@ -24,11 +23,15 @@ const takeNumber = function (unknowNum) {
         return alert('Игра окончена');
     }
 
-    while (enterNumber.trim() == '' || !isFinite(enterNumber)) {
-        alert('Введи число!');
+//    while (numOutOfRange(enterNumber)){
+//         enterNumber = prompt('Введите число от 1 до 100');
+//     }
+
+    while (enterNumber.trim() == '' || !isFinite(enterNumber) || numOutOfRange(enterNumber)) {
+        alert('Ошибка! Необходимо ввести число! Диапазон значений от 1 до 100. ');
         enterNumber = prompt('Введите число от 1 до 100');
     } 
-
+  
     enterNumber = Number(enterNumber);
 
     if(enterNumber < unknowNum) {
@@ -40,7 +43,7 @@ const takeNumber = function (unknowNum) {
     }
 
     if (enterNumber === unknowNum)
-    { return endGame = alert('Поздравляю, Вы угадали!!!')}
+    { return alert('Поздравляю, Вы угадали!!!')}
 
     takeNumber(unknowNum);
 }
@@ -53,6 +56,15 @@ const numLessAlert = function () {
 const numMoreAlert = function () {
 
     alert('Загаданное число больше');
+}
+
+const numOutOfRange = function (num) {
+    let result;
+
+    if (num < 1 || num > 100) {
+        result = true;
+    } else result = false;
+    return result;
 }
 
 //запуск игры
