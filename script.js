@@ -25,8 +25,8 @@ const takeNumber = function (unknowNum, attempts) {
         return alert('Игра окончена');
     }
 
-    while (enterNumber.trim() == '' || !isFinite(enterNumber)) {
-        alert('Введи число!');
+    while (enterNumber.trim() == '' || !isFinite(enterNumber) || numOutOfRange(enterNumber)) {
+        alert('Ошибка! Необходимо ввести число! Диапазон значений от 1 до 100.');
         enterNumber = prompt('Введите число от 1 до 100');
     } 
 
@@ -68,6 +68,15 @@ const numLessAlert = function (attempt) {
 const numMoreAlert = function (attempt) {
 
     alert('Загаданное число больше, осталось ' + attempt + ' попыток');
+}
+
+const numOutOfRange = function (num) {
+    let result;
+
+    if (num < 1 || num > 100) {
+        result = true;
+    } else result = false;
+    return result;
 }
 
 //запуск игры
